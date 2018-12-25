@@ -1,0 +1,16 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: microsoft/dotnet:2.1-runtime
+    steps:
+      - checkout
+      - run:
+          name: Restore Nuget
+          command: dotnet restore
+      - run:
+          name: Build Solution
+          command: dotnet build ./CircleCI-tutorial.sln
+      - run:
+          name: Run Test
+          command: dotnet test PrimeService.Tests/ --no-build
